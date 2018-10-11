@@ -13,7 +13,12 @@ dailylogSum()
 	if [ -z "$(ls -A $1)" ]; then
 		echo "0K"
 	else
-		echo $(find $1/* -type f | grep $2 | xargs du -ch | grep total | awk '{print $1}')
+		list=$(find $1/* -type f | grep $2)
+		if [ -z "$list" ]; then
+			echo "0K"
+		else
+			echo $(echo $list | xargs du -h --max-depth=1 | grep total | awk '{print $1}')
+		fi
 	fi
 }
 
