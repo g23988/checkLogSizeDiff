@@ -10,7 +10,11 @@ yesterday=`date -d '1 day ago' '+%Y%m%d'`
 #output ==> sum size
 dailylogSum()
 {
-	echo $(find $1/* -type f | grep $2 | xargs du -ch | grep total | awk '{print $1}')
+	if [ -z "$(ls -A $1)" ]; then
+		echo "0K"
+	else
+		echo $(find $1/* -type f | grep $2 | xargs du -ch | grep total | awk '{print $1}')
+	fi
 }
 
 #input ==> 20181011
