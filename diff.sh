@@ -17,7 +17,7 @@ dailylogSum()
 		if [ -z "$list" ]; then
 			echo "0K"
 		else
-			echo $(echo $list | xargs du -h | grep total | awk '{print $1}')
+			echo $(echo $list | xargs du -ch | grep total | awk '{print $1}')
 		fi
 	fi
 }
